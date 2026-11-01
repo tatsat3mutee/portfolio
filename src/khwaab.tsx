@@ -11,8 +11,31 @@ import { podcast } from './data/site';
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
-// /khwaab/?ep=<slug> opens a specific episode in the player
-const fromUrl = new URLSearchParams(location.search).get('ep');
+// /khwaab/<slug>/ (or /khwaab/?ep=<slug>) opens that episode in the player
+const fromUrl = location.pathname.match(/^\/khwaab\/([^/]+)\/?$/)?.[1] ?? new URLSearchParams(location.search).get('ep');
+const episodeUrl = (ep: Episode) => `${location.origin}/khwaab/${ep.slug}/`;
+
+function ShareButton({ ep }: { ep: Episode }) {
+  const [done, setDone] = useState(false);
+  const share = async () => {
+    const url = episodeUrl(ep);
+    try {
+      if (navigator.share) await navigator.share({ title: `${ep.title} · ${podcast.name}`, url });
+      else {
+        await navigator.clipboard.writeText(url);
+        setDone(true);
+        setTimeout(() => setDone(false), 1600);
+      }
+    } catch {
+      /* share sheet closed */
+    }
+  };
+  return (
+    <button className="more-btn share-btn" onClick={share} aria-label={`Share ${ep.title}`}>
+      {done ? 'Link copied' : 'Share'}
+    </button>
+  );
+}
 const initial = episodes.find((e) => e.slug === fromUrl) ?? episodes[0];
 
 function Hero({ playerRef }: { playerRef: React.RefObject<HTMLDivElement> }) {
@@ -101,6 +124,7 @@ function EpisodeRow({ ep }: { ep: Episode }) {
           <span>{[ep.subtitle, ep.number ? `Episode ${ep.number}` : null, fmtDate(ep.date)].filter(Boolean).join(' · ')}</span>
         </div>
         <span className="ep-dur">{fmtTime(ep.duration)}</span>
+        <ShareButton ep={ep} />
         {ep.description && (
           <button className="more-btn" onClick={() => setOpen((v) => !v)} aria-expanded={open}>
             {open ? 'Less' : 'About'}
