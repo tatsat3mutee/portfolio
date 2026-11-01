@@ -1,0 +1,95 @@
+{
+  "source": "snapshot",
+  "fetchedAt": "2026-11-01",
+  "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts211/v4/09/d1/7f/09d17f23-df22-f73e-e20d-718b6c523e81/mza_842036751607927906.jpeg/{w}x{h}bb.{f}",
+  "episodes": [
+    {
+      "slug": "agar-tum",
+      "title": "Agar Tum...",
+      "subtitle": "Kuch Khwaahishein, Kuch Sukoon",
+      "number": null,
+      "date": "2026-11-01T10:43:30Z",
+      "duration": 248,
+      "audio": "https://play.hubhopper.com/0e22c5e87abba1d61075f74763b74f5c.mp3?s=rss-feed&v=49d4c990152f",
+      "appleUrl": "https://podcasts.apple.com/in/podcast/id1548229682?i=1000799211508",
+      "description": "Some feelings are difficult to explain, yet they find their way into the simplest of words. Agar Tum… is a little journey through the thoughts we keep to ourselves, the moments we wish could last longer, and the quiet happiness of having someone who makes life feel a little more beautiful. It's about love, unspoken wishes, finding comfort in someone's presence, and discovering that sometimes we don't need everything we ever wished for. Sometimes, one peaceful evening and a few heartfelt moments are enough. After almost two years, I'm bringing Khwaab-e-Surkhaab back with this little piece of my heart. A poem written and narrated by me, with a little music to accompany the words. So put on your headphones, take a breath, and let the words flow. Kuch khwaab adhoore sahi… kuch ehsaas phir bhi khoobsurat hain. - Tatsat (Khwaab-e-Surkhaab)"
+    },
+    {
+      "slug": "kayi-sawal-hai-khudse-par-hal-kaise-karunga",
+      "title": "Kayi Sawal hai khudse, Par hal kaise karunga",
+      "subtitle": null,
+      "number": 31,
+      "date": "2024-12-26T17:30:39Z",
+      "duration": 184,
+      "audio": "https://play.hubhopper.com/965d8a974d8e5dec34bfb597df956971.mp3?s=rss-feed&v=68948e9726ff",
+      "appleUrl": "https://podcasts.apple.com/in/podcast/id1548229682?i=1000681766900",
+      "description": "Kayi sawal hai khudse, par hal kaise karunga, Kayi khwab hai dil me magar, zikar mai kisse karunga? Kuch baatein hai ankhani, jinke jawab kise dunga.. Kaisa gya yeh saal Mera, yeh baat mai kisse krunga?"
+    },
+    {
+      "slug": "ek-arsa-hogya",
+      "title": "Ek Arsa Hogya...!",
+      "subtitle": null,
+      "number": 30,
+      "date": "2024-12-07T18:45:46Z",
+      "duration": 129,
+      "audio": "https://play.hubhopper.com/2a2edebd60d41d8cb10880f9f3b1132c.mp3?s=rss-feed&v=1755d22825b4",
+      "appleUrl": "https://podcasts.apple.com/in/podcast/id1548229682?i=1000679592894",
+      "description": "ki likhe hue kuch, ab toh ek arsa hogya, Khayalon mein dube ab, na jaane kitna waqt hogya. Kho gye kinhi galiyon mein, un galiyon ka koi ant nahi mila, Aur lafzon ne na jaane kya narazgi rakhli, Ki zubaan par aane se, na jaane kab muh mod liya."
+    },
+    {
+      "slug": "mujhe-kisi-aise-ka-intezaar-hai",
+      "title": "Mujhe, Kisi Aise ka Intezaar Hai",
+      "subtitle": null,
+      "number": 29,
+      "date": "2023-02-10T03:57:19Z",
+      "duration": 160,
+      "audio": "https://play.hubhopper.com/7fb851c7bfa7de55bacee6af933c2738.mp3?s=rss-feed&v=2e44f0ff997f",
+      "appleUrl": "https://podcasts.apple.com/in/podcast/id1548229682?i=1000598974098",
+      "description": "Jiski photos se apne phone ke gallery bhar saku.. Jiske never ending baaton se apne WhatsApp ke chats bhar saku.. Jiski masumiyat se apne har gusse ko, chand minto me shant kar saku... Mujhe, kisi aise ka intezaar hai..!"
+    },
+    {
+      "slug": "ek-naya-saal-2023",
+      "title": "Ek Naya Saal ' 2023",
+      "subtitle": null,
+      "number": 28,
+      "date": "2022-12-29T19:56:02Z",
+      "duration": 196,
+      "audio": "https://play.hubhopper.com/0d0847bacaa714f2f6b145c6a0cca193.mp3?s=rss-feed&v=947cece13659",
+      "appleUrl": "https://podcasts.apple.com/in/podcast/id1548229682?i=1000591624344",
+      "description": "Check out my latest episode! \" Ek aur saal beet gya.. Dekhte hi dekhte 2022 bhi chala gya...! \""
+    },
+    {
+      "slug": "yaadein",
+      "title": "Yaadein",
+      "subtitle": "Memories",
+      "number": 27,
+      "date": "2022-08-20T18:30:00Z",
+      "duration": 143,
+      "audio": "https://play.hubhopper.com/f723f3a595b9a818c607b6229efc8f9e.mp3?s=rss-feed&v=5e951ce8d870",
+      "appleUrl": "https://podcasts.apple.com/in/podcast/id1548229682?i=1000576805607",
+      "description": "Yaadein..! Har saal umar badhte hai.. Yaadon ki ek nayi kitaab likhte hai.. Kuch meethe kuch nameeken.. Wo yaari dosti sab bs ek kirdar lagte hai..!"
+    },
+    {
+      "slug": "har-ghar-tiranga-lehraya-hai",
+      "title": "Har Ghar Tiranga Lehraya Hai",
+      "subtitle": "Happy Independence Day",
+      "number": 26,
+      "date": "2022-08-14T20:53:44Z",
+      "duration": 138,
+      "audio": "https://play.hubhopper.com/a2d01e531510c7129585d896b94d6811.mp3?s=rss-feed",
+      "appleUrl": "https://podcasts.apple.com/in/podcast/id1548229682?i=1000576054114",
+      "description": "Check out my latest episode! Kya jaanenge hum keemat unki..Lahu jisne sarhad pe bahaya tha..Bura laga toh maaf krna..Par azaadi me humne thode,,Pran apna gawaya tha..!"
+    },
+    {
+      "slug": "kuch-pal-sukoon-ke-ghar",
+      "title": "Kuch Pal, Sukoon ke Ghar",
+      "subtitle": "Mountain Trip",
+      "number": 25,
+      "date": "2022-04-19T18:30:00Z",
+      "duration": 178,
+      "audio": "https://play.hubhopper.com/f86c72f9dfb249fec223769e382e8283.mp3?s=rss-feed&v=bb4b75d2831d",
+      "appleUrl": "https://podcasts.apple.com/in/podcast/id1548229682?i=1000558174990",
+      "description": "Check out my latest episode!"
+    }
+  ]
+}
