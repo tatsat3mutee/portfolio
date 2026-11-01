@@ -7,3 +7,4 @@ dist/
 lighthouse/
 shot-*.png
 *.tsbuildinfo
+dist-ssr/

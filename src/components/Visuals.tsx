@@ -45,7 +45,20 @@ function Pipeline() {
   const y = 120;
   return (
     <div className="vis vis-pipe">
-      <svg viewBox="0 0 540 240" role="img" aria-label="Agent pipeline: detect, investigate, reason, critic, report">
+      {/* small screens: readable steps instead of a shrunken diagram */}
+      <div className="pipe-narrow" role="img" aria-label="Agent pipeline: detect, investigate, reason, critic, report">
+        <span className="pipe-cap">Hybrid RAG · BM25 + dense + graph</span>
+        <div className="pipe-steps">
+          {nodes.map((n, i) => (
+            <span key={n.label} className="pipe-step" style={{ animationDelay: `${i * 0.6}s` }}>
+              {n.label}
+              {i < nodes.length - 1 && <i aria-hidden="true">{i === 2 ? '⇄' : '→'}</i>}
+            </span>
+          ))}
+        </div>
+        <span className="pipe-cap">Critic sends weak answers back to refine</span>
+      </div>
+      <svg className="pipe-wide" viewBox="0 0 540 240" role="img" aria-label="Agent pipeline: detect, investigate, reason, critic, report">
         <defs>
           <linearGradient id="pg" x1="0" x2="1">
             <stop offset="0" stopColor="#fdba96" />

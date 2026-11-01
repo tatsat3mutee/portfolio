@@ -64,13 +64,7 @@ export function Nav({ links, cta }: { links: { href: string; label: string; hide
     return () => io.disconnect();
   }, [links]);
   return (
-    <motion.nav
-      className="nav"
-      aria-label="Main"
-      initial={{ y: -40, opacity: 0, x: '-50%' }}
-      animate={{ y: 0, opacity: 1, x: '-50%' }}
-      transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
-    >
+    <nav className="nav nav-in" aria-label="Main">
       <a className="nav-logo" href="/" aria-label="Tatsat Pandey, home">t</a>
       <div className="nav-links">
         {links.map((l) => {
@@ -84,7 +78,7 @@ export function Nav({ links, cta }: { links: { href: string; label: string; hide
         })}
       </div>
       {cta && <a className="nav-cta" href={cta.href}>{cta.label}</a>}
-    </motion.nav>
+    </nav>
   );
 }
 
@@ -139,7 +133,7 @@ export function Footer({ updated }: { updated?: string }) {
     <footer className="footer">
       <div className="wrap">
         <div className="footer-row">
-          <span>© {new Date().getFullYear()} Tatsat Pandey</span>
+          <span suppressHydrationWarning>© {new Date().getFullYear()} Tatsat Pandey</span>
           <span>
             <a href="/">Home</a> · <a href="/khwaab/">Khwaab-e-Surkhaab</a> · <a href={`mailto:${site.email}`}>Email</a>
           </span>

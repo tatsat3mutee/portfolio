@@ -44,7 +44,8 @@ export const fmtTime = (s: number) => {
 };
 
 export const fmtDate = (iso: string) =>
-  new Date(iso).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+  new Date(iso).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'Asia/Kolkata' });
+export const fmtYear = (iso: string) => new Date(iso).toLocaleDateString('en-IN', { year: 'numeric', timeZone: 'Asia/Kolkata' });
 
 export const ago = (iso: string) => {
   const days = Math.floor((Date.now() - new Date(iso).getTime()) / 86400000);
