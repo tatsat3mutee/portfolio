@@ -22,25 +22,29 @@ const overrides = {
   youtube: d.youtubeId ? ytWatch(d.youtubeId) : undefined,
 };
 ---
-<Base theme="khwaab" scriptFont title={`${d.title} · ${podcast.name}`} description={d.description} image="/og/khwaab.png">
+<Base theme="khwaab" scriptFont title={`${d.title}${d.subtitle ? ' ' + d.subtitle : ''} · ${podcast.name}`} description={d.description} image="/og/khwaab.png">
   <article class="wrap ep">
     <p class="eyebrow"><a href="/khwaab">{podcast.name}</a></p>
     <h1>{d.title}</h1>
+    {d.subtitle && <p class="subtitle">{d.subtitle}</p>}
     {d.date && <p class="muted"><time datetime={d.date.toISOString()}>{formatDate(d.date)}</time></p>}
     <p class="desc">{d.description}</p>
     {d.youtubeId && (
       <Embed href={ytWatch(d.youtubeId)} embed={ytEmbed(d.youtubeId)} thumb={ytThumb(d.youtubeId)} title={`${d.title} on YouTube`} label={`Watch “${d.title}”`} />
     )}
     {d.audioUrl && <audio controls preload="none" src={d.audioUrl}><a href={d.audioUrl}>Download audio</a></audio>}
+    <div class="notes"><Content /></div>
     <h2>Listen on</h2>
     <PlatformButtons overrides={overrides} />
-    {d.showPoem && <div class="poem"><Content /></div>}
+    {d.showPoem && d.poem && <div class="poem">{d.poem}</div>}
   </article>
 </Base>
 <style>
   .ep { max-width: 52rem; padding-block: var(--space-5); }
   .ep .eyebrow a { text-decoration: none; }
+  .subtitle { font-family: var(--font-display); font-style: italic; font-size: var(--step-2); color: var(--amber); margin-top: calc(-1 * var(--space-2)); }
   .desc { font-size: var(--step-1); }
+  .notes { margin-top: var(--space-4); max-width: 42rem; }
   h2 { margin-top: var(--space-5); font-size: var(--step-1); }
   audio { width: 100%; margin-top: var(--space-3); }
   .poem { margin-top: var(--space-5); white-space: pre-line; font-family: var(--font-display); font-size: var(--step-1); line-height: 1.7; }

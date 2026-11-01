@@ -12,7 +12,7 @@ export const site = {
 export const social = {
   github: 'https://github.com/tatsat3mutee',
   linkedin: 'https://www.linkedin.com/in/tatsat-pandey/', // TODO(Tatsat): confirm
-  instagram: '', // TODO(Tatsat): Instagram profile URL
+  instagram: 'https://www.instagram.com/khwaab_e_surkhaab/',
   youtube: 'https://www.youtube.com/channel/UCDgjJb9UjkElHwt8Lv7sk-w',
 };
 
@@ -36,7 +36,7 @@ export const platforms: Platform[] = [
   { id: 'apple', label: 'Apple Podcasts', url: `https://podcasts.apple.com/in/podcast/surkhaab/id${podcast.appleId}` },
   { id: 'jiosaavn', label: 'JioSaavn', url: 'https://www.jiosaavn.com/shows/surkhaab/1/uDRhwF1FnQk_' },
   { id: 'amazon', label: 'Amazon Music', url: 'https://music.amazon.in/podcasts/dc80b6dc-e001-4e5b-9c6c-f50ab83ea90b/surkhaab' },
-  { id: 'hubhopper', label: 'Hubhopper', url: '' }, // TODO(Tatsat): Hubhopper show URL
+  { id: 'hubhopper', label: 'Hubhopper', url: 'https://hubhopper.com/podcast/surkhaab/318827' },
   { id: 'instagram', label: 'Instagram', url: podcast.instagram },
 ];
 

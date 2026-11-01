@@ -11,4 +11,4 @@ Add 4–6 vibrant.design screenshots to `design/references/` (one line each on w
 
 **Layout:** a bento grid on `/` (Work wide, Khwaab tall tile with art, Projects, Research), then recognitions. `/khwaab` has a large dusk hero with art and platform buttons, then the latest episode video, live Spotify/Apple players, the episode list, and an about section.
 
-**Artwork:** an original SVG sunset (lantern, chai, notebook, bougainvillea) until the real cover is added to `public/khwaab/`.
+**Cover art:** `design/cover/cover.html`. A dusk balcony with a lantern, cutting chai, an open notebook and bougainvillea, and a pair of surkhaab (ruddy shelduck) birds crossing the sun. The title is in Devanagari (Rozha One) and Roman (Fraunces), and the tagline is in Caveat. It exports 3000/1400 px squares for podcast platforms, WebP sizes for the site, and the 1200×630 share image.

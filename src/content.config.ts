@@ -9,6 +9,7 @@ const episodes = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/episodes' }),
   schema: z.object({
     title: z.string(),
+    subtitle: z.string().optional(),
     // Used for "latest first". Leave out if unknown; `number` is the fallback.
     date: z.coerce.date().optional(),
     number: z.number().optional(),
@@ -20,7 +21,9 @@ const episodes = defineCollection({
     amazonUrl: url,
     hubhopperUrl: url,
     audioUrl: url,
-    // Poem text goes in the body. It is only shown when this is true.
+    // The Markdown body holds the episode notes (always shown).
+    // Poem text goes in `poem` and is only shown when showPoem is true.
+    poem: z.string().optional(),
     showPoem: z.boolean().default(false),
     draft: z.boolean().default(false),
   }),

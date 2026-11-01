@@ -1,6 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
-import KhwaabArt from '../../components/KhwaabArt.astro';
+import Cover from '../../components/Cover.astro';
 import Embed from '../../components/Embed.astro';
 import PlatformButtons from '../../components/PlatformButtons.astro';
 import { podcast, platforms } from '../../config/links';
@@ -27,7 +27,7 @@ const youtube = platforms.find((p) => p.id === 'youtube')!;
         <p class="script">{podcast.tagline}</p>
         <PlatformButtons />
       </div>
-      <KhwaabArt class="hero-art" />
+      <Cover class="hero-art" eager />
     </div>
   </section>
 
@@ -35,6 +35,7 @@ const youtube = platforms.find((p) => p.id === 'youtube')!;
     <section class="wrap" aria-labelledby="latest-h">
       <p class="eyebrow">Latest episode</p>
       <h2 id="latest-h"><a href={`/khwaab/${latest.id}`}>{latest.data.title}</a></h2>
+      {latest.data.subtitle && <p class="subtitle">{latest.data.subtitle}</p>}
       {latest.data.date && <p class="muted"><time datetime={latest.data.date.toISOString()}>{formatDate(latest.data.date)}</time></p>}
       <p>{latest.data.description}</p>
       {latest.data.youtubeId && (
@@ -81,6 +82,7 @@ const youtube = platforms.find((p) => p.id === 'youtube')!;
       {episodes.map((ep) => (
         <li class="card">
           <a href={`/khwaab/${ep.id}`}><strong>{ep.data.title}</strong></a>
+          {ep.data.subtitle && <span> {ep.data.subtitle}</span>}
           {ep.data.date && <span class="muted"> · {formatDate(ep.data.date)}</span>}
           <p class="muted">{ep.data.description}</p>
         </li>
@@ -90,8 +92,9 @@ const youtube = platforms.find((p) => p.id === 'youtube')!;
 
   <section class="wrap narrow" aria-labelledby="about-h">
     <h2 id="about-h">About the show</h2>
-    <p>{podcast.name} is a Hindi poetry podcast written and read by Tatsat Pandey.</p>
-    <!-- TODO(Tatsat): a few lines about the show in your own words. -->
+    <p>{podcast.name} is a Hindi poetry podcast: poems written and narrated by Tatsat Pandey, with a little music to accompany the words.</p>
+    <p>After almost two years away, the show is back.</p>
+    <!-- TODO(Tatsat): a few more lines about the show in your own words. -->
   </section>
 </Base>
 
@@ -101,9 +104,10 @@ const youtube = platforms.find((p) => p.id === 'youtube')!;
   .hero h1 { font-size: var(--step-4); margin-bottom: var(--space-2); }
   .hero-copy .eyebrow { color: #f0cfb2; }
   .script { font-family: var(--font-script); font-size: var(--step-3); line-height: 1.1; color: var(--amber); margin-bottom: var(--space-4); }
-  .hero-art { width: 100%; max-width: 30rem; justify-self: center; border-radius: 24px; box-shadow: 0 20px 60px rgb(0 0 0 / 0.45); }
+  :global(.hero-art) { width: 100%; height: auto; max-width: 30rem; justify-self: center; border-radius: 20px; box-shadow: 0 20px 60px rgb(0 0 0 / 0.45); }
   @media (min-width: 52rem) { .hero-grid { grid-template-columns: 1.1fr 1fr; } }
 
+  .subtitle { font-family: var(--font-display); font-style: italic; font-size: var(--step-1); color: var(--amber); margin-top: calc(-1 * var(--space-2)); }
   h2 a { text-decoration: none; }
   h2 a:hover { text-decoration: underline; }
   .player { max-width: 52rem; }
