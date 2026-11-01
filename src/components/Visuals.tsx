@@ -120,16 +120,6 @@ function Ledger() {
   );
 }
 
-function Radar() {
-  const blips = [[30, 40], [70, 28], [58, 72], [22, 66], [80, 58]];
-  return (
-    <div className="vis">
-      <div className="radar">
-        {blips.map(([x, y], i) => <i key={i} style={{ left: `${x}%`, top: `${y}%`, animationDelay: `${i * 0.7}s` }} />)}
-      </div>
-    </div>
-  );
-}
 
 function Query() {
   const h = [40, 70, 55, 90, 62, 78];
@@ -146,39 +136,14 @@ function Query() {
   );
 }
 
-function Docs() {
-  return (
-    <div className="vis">
-      <div className="docs"><i /><i /><i /><span className="beam" /></div>
-    </div>
-  );
-}
 
-function Chat() {
-  return (
-    <div className="vis">
-      <div className="chat"><span className="q" /><span className="a"><i /><i /><i /></span></div>
-    </div>
-  );
-}
 
-function Finance() {
-  return (
-    <div className="vis">
-      <div className="donut" />
-    </div>
-  );
-}
 
 export function ProjectVisual({ kind }: { kind: Visual }) {
   switch (kind) {
     case 'digest': return <Digest />;
     case 'pipeline': return <Pipeline />;
     case 'ledger': return <Ledger />;
-    case 'radar': return <Radar />;
     case 'query': return <Query />;
-    case 'docs': return <Docs />;
-    case 'chat': return <Chat />;
-    case 'finance': return <Finance />;
   }
 }

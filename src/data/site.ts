@@ -36,7 +36,7 @@ export const podcast = {
   ],
 };
 
-export type Visual = 'digest' | 'pipeline' | 'ledger' | 'radar' | 'query' | 'docs' | 'chat' | 'finance';
+export type Visual = 'digest' | 'pipeline' | 'ledger' | 'query';
 
 export type Project = {
   repo: string; // GitHub repo name: live stars/language/last-updated come from it
@@ -48,6 +48,7 @@ export type Project = {
   live?: string;
   liveLabel?: string;
   size: 'xl' | 'wide' | 'tall' | 'half' | 'sm';
+  flip?: boolean; // wide cards: put the visual on the left
 };
 
 // Selected work, in display order. Facts come from each repo's README.
@@ -98,54 +99,21 @@ export const projects: Project[] = [
     size: 'wide',
   },
   {
-    repo: 'techradar',
-    name: 'TechRadar',
-    tagline: "An AI engineer's intelligence hub.",
-    points: ['Daily aggregated news, a frontier-model tracker and hands-on sessions', 'Auto-updated via GitHub Actions'],
-    stack: ['Astro', 'GitHub Actions'],
-    visual: 'radar',
-    size: 'half',
-  },
-  {
     repo: 'IntelliQuery',
     name: 'IntelliQuery AI',
-    tagline: 'RAG, natural language → SQL, ML and agents over any dataset.',
-    points: ['Document Q&A, auto SQL, dataset-agnostic predictions and auto charts'],
-    stack: ['Python', 'RAG', 'NL→SQL', 'Databricks'],
+    tagline: 'Ask questions of any dataset: RAG, natural language → SQL, ML and agents in one platform.',
+    points: [
+      'Document Q&A over uploaded PDFs and text',
+      'Turns plain-English questions into SQL, then charts the answer',
+      'Dataset-agnostic ML predictions (churn, attrition) and goal-driven agents',
+    ],
+    stack: ['Python', 'RAG', 'NL→SQL', 'Databricks', 'Agents'],
     visual: 'query',
-    size: 'half',
-  },
-  {
-    repo: 'DocRag',
-    name: 'DocRag',
-    tagline: 'Agentic RAG document search with LangGraph.',
-    points: ['Web, PDF and text ingestion, FAISS search, source tracking'],
-    stack: ['LangGraph', 'FAISS', 'Groq', 'Streamlit'],
-    visual: 'docs',
-    size: 'sm',
-  },
-  {
-    repo: 'AskRag',
-    name: 'AskRag',
-    tagline: 'A production-ready RAG platform with a UI and a REST API.',
-    points: ['Free HuggingFace embeddings, FAISS, Groq, Docker and CI'],
-    stack: ['FastAPI', 'LangChain', 'FAISS', 'Docker'],
-    visual: 'chat',
-    size: 'sm',
-  },
-  {
-    repo: 'fincura',
-    name: 'Fincura',
-    tagline: 'Personal finance: expenses, income, budgets and savings goals.',
-    points: ['FastAPI + SQLite backend, React + Vite frontend'],
-    stack: ['FastAPI', 'React', 'SQLite'],
-    visual: 'finance',
-    size: 'sm',
+    size: 'wide',
+    flip: true,
   },
 ];
 
-// Repos never shown in the "more on GitHub" list.
-export const hiddenRepos = [/^skills-/, /^testrepo$/, /^tatsat3mutee$/, /^portfolio$/, /^birthday$/, /^Resume$/, /^BITS-M\.Tech$/, /^ProjectMasters$/, /^multiagent-rag-telecom-billing-rca$/];
 
 export const recognitions = [
   { title: 'IBM Hall of Fame', when: 'Apr 2025' },

@@ -1,8 +1,8 @@
 import { AnimatePresence, motion, useMotionValue, useReducedMotion, useSpring, useTransform } from 'motion/react';
 import { useEffect, useRef, useState, type MouseEvent as RMouseEvent } from 'react';
 import { Icons } from '../lib/icons';
-import { ago, artwork, episodeCount, episodes, fmtTime, langColor, latest, repoByName, repos } from '../lib/data';
-import { hiddenRepos, podcast, projects, recognitions, site, stack, type Project } from '../data/site';
+import { ago, artwork, episodeCount, episodes, fmtTime, langColor, latest, repoByName } from '../lib/data';
+import { podcast, projects, recognitions, site, stack, type Project } from '../data/site';
 import { FeaturedPlayer, PlayButton } from '../player/Player';
 import { usePlayer } from '../player/PlayerContext';
 import { Platforms, Reveal, ResumeButton, SocialLinks } from './common';
@@ -212,7 +212,7 @@ function ProjectCard({ p, i }: { p: Project; i: number }) {
     <motion.article
       ref={ref}
       onMouseMove={onMove}
-      className={`card ${p.size}`}
+      className={`card ${p.size}${p.flip ? ' flip' : ''}`}
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-60px' }}
@@ -250,11 +250,6 @@ function ProjectCard({ p, i }: { p: Project; i: number }) {
 }
 
 export function Work() {
-  const featured = new Set(projects.map((p) => p.repo.toLowerCase()));
-  const more = repos
-    .filter((r) => !r.fork && !featured.has(r.name.toLowerCase()) && !hiddenRepos.some((rx) => rx.test(r.name)))
-    .sort((a, b) => b.pushedAt.localeCompare(a.pushedAt))
-    .slice(0, 6);
   return (
     <section className="section" id="work">
       <div className="wrap">
@@ -264,34 +259,15 @@ export function Work() {
             <h2 className="section-title">Things I've <span className="serif grad-text">built</span></h2>
           </Reveal>
           <Reveal delay={0.1}>
-            <p className="section-sub">Agents, retrieval systems and developer tools. Every card is a real repository, and the activity is pulled from GitHub on each deploy.</p>
+            <p className="section-sub">Agents, retrieval and developer tools. Activity on each card is pulled live from GitHub on every deploy.</p>
+            <a className="link-pill" href="https://github.com/tatsat3mutee?tab=repositories" target="_blank" rel="noopener" style={{ marginTop: 16 }}>
+              <Icons.github /> All repositories <Icons.arrowUpRight />
+            </a>
           </Reveal>
         </div>
         <div className="bento">
           {projects.map((p, i) => <ProjectCard key={p.repo} p={p} i={i} />)}
         </div>
-        {more.length > 0 && (
-          <Reveal className="more">
-            <div className="more-head">
-              <h3>More on GitHub</h3>
-              <a className="link-pill" href="https://github.com/tatsat3mutee?tab=repositories" target="_blank" rel="noopener">All repositories <Icons.arrowUpRight /></a>
-            </div>
-            <ul className="repo-list">
-              {more.map((r) => (
-                <li key={r.name}>
-                  <a href={r.url} target="_blank" rel="noopener">
-                    <b>{r.name}</b>
-                    <p>{r.description || 'Repository on GitHub'}</p>
-                    <span className="meta">
-                      {r.language && <span className="lang"><i style={{ background: langColor[r.language] ?? 'var(--peach)' }} />{r.language}</span>}
-                      <span>{ago(r.pushedAt)}</span>
-                    </span>
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </Reveal>
-        )}
       </div>
     </section>
   );
@@ -354,7 +330,6 @@ export function Podcast({ playerRef }: { playerRef: React.RefObject<HTMLDivEleme
 /* ---------------- About ---------------- */
 
 export function About() {
-  const publicRepos = repos.filter((r) => !r.fork && !/^skills-/.test(r.name)).length;
   return (
     <section className="section" id="about">
       <div className="wrap">
@@ -379,7 +354,7 @@ export function About() {
               </p>
             </div>
             <div className="stats">
-              <div className="stat"><b>{publicRepos}</b><span>public repositories</span></div>
+              <div className="stat"><b>{projects.length}</b><span>featured builds</span></div>
               <div className="stat"><b>{episodeCount}+</b><span>poetry episodes</span></div>
               <div className="stat"><b>{recognitions.length}</b><span>recognitions at IBM</span></div>
             </div>
