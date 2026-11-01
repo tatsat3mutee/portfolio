@@ -4,10 +4,9 @@ subtitle: Kuch Khwaahishein, Kuch Sukoon
 date: 2026-11-01
 description: Some feelings are difficult to explain, yet they find their way into the simplest of words.
 youtubeId: Xb4UdCB2xVU
-# Direct episode links. Empty ones fall back to the show page.
-# TODO(Tatsat): paste the episode links once each platform lists it.
+# Optional direct episode links. Empty ones use the show links from src/config/links.ts.
 spotifyUrl: ''
-appleUrl: ''
+appleUrl: https://podcasts.apple.com/in/podcast/agar-tum-kuch-khwaahishein-kuch-sukoon/id1548229682?i=1000799211508
 jiosaavnUrl: ''
 amazonUrl: ''
 hubhopperUrl: ''
