@@ -21,6 +21,16 @@ Every build (every push to `main` on Render) runs `scripts/fetch-data.mjs` first
 
 If either source is unreachable, the saved copies in `src/data/*.json` are used and the build still succeeds.
 
+## SEO
+
+After the normal build, `scripts/postbuild.mjs`:
+
+- **pre-renders** the home page, `/khwaab` and every episode page into real HTML, so Google, Bing and link previews see the full text without running JavaScript (React then takes over in the browser)
+- adds **structured data** (schema.org): `Person` with your profiles, `WebSite`, `PodcastSeries` and one `PodcastEpisode` per episode
+- writes **`sitemap.xml`** and **`robots.txt`**
+
+To check: `npm run build && npm run preview`, then view the page source.
+
 To refresh without code changes, trigger a manual deploy in Render (or push any commit).
 
 ## Common edits

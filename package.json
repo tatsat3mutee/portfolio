@@ -10,7 +10,7 @@
     "dev": "vite",
     "data": "node scripts/fetch-data.mjs",
     "prebuild": "node scripts/fetch-data.mjs",
-    "build": "tsc --noEmit && vite build && node scripts/episode-pages.mjs",
+    "build": "tsc --noEmit && vite build && vite build --ssr src/entry-server.tsx && node scripts/postbuild.mjs",
     "preview": "vite preview --port 4321",
     "og": "node scripts/make-og.mjs"
   },

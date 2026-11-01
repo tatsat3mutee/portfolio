@@ -75,11 +75,11 @@ export function PlayerProvider({ children, initial }: { children: ReactNode; ini
         setTime(0);
         setDuration(next.duration);
         setStarted(true);
-        void a.play();
+        a.play().catch(() => setPlaying(false));
         return;
       }
       setStarted(true);
-      if (a.paused) void a.play();
+      if (a.paused) a.play().catch(() => setPlaying(false));
       else a.pause();
     },
     [episode, rate],

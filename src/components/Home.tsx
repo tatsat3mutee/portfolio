@@ -1,7 +1,7 @@
 import { AnimatePresence, motion, useMotionValue, useReducedMotion, useSpring, useTransform } from 'motion/react';
 import { useEffect, useRef, useState, type MouseEvent as RMouseEvent } from 'react';
 import { Icons } from '../lib/icons';
-import { ago, artwork, episodeCount, episodes, fmtTime, langColor, latest, repoByName } from '../lib/data';
+import { ago, artwork, episodeCount, episodes, fmtTime, fmtYear, langColor, latest, repoByName } from '../lib/data';
 import { podcast, projects, recognitions, site, stack, type Project } from '../data/site';
 import { FeaturedPlayer, PlayButton } from '../player/Player';
 import { usePlayer } from '../player/PlayerContext';
@@ -56,9 +56,13 @@ const CODE_LEN = CODE.reduce((n, l) => n + l.reduce((m, [t]) => m + t.length, 0)
 
 function Terminal() {
   const reduce = useReducedMotion();
-  const [n, setN] = useState(reduce ? CODE_LEN : 0);
+  // always start empty so the pre-rendered HTML matches; reduced-motion users get the full code at once
+  const [n, setN] = useState(0);
   useEffect(() => {
-    if (reduce) return;
+    if (reduce) {
+      setN(CODE_LEN);
+      return;
+    }
     let iv = 0;
     const start = setTimeout(() => {
       iv = window.setInterval(() => setN((v) => (v >= CODE_LEN + 260 ? 0 : v + 2)), 32);
@@ -129,47 +133,47 @@ export function Hero() {
       <div className="spot" aria-hidden="true" />
       <div className="wrap hero-grid">
         <div>
-          <motion.a href="#podcast" className="status" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.05, duration: 0.6, ease }}>
+          <a href="#podcast" className="status rise" style={{ animationDelay: '0.05s' }}>
             <span className="tag">New</span>
             <span><b>{latest.title}</b> is out on {podcast.name}</span>
             <Icons.arrowRight width={14} height={14} />
-          </motion.a>
+          </a>
           <h1>
             {words.map((w, i) => (
-              <motion.span key={w} className="word" initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.08 + i * 0.05, duration: 0.7, ease }}>
+              <span key={w} className="word rise" style={{ animationDelay: `${0.08 + i * 0.05}s` }}>
                 {w}&nbsp;
-              </motion.span>
+              </span>
             ))}
-            <motion.span className="word" initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.18, duration: 0.7, ease }}>
+            <span className="word rise" style={{ animationDelay: '0.18s' }}>
               <RotatingWord />
-            </motion.span>{' '}
-            <motion.span className="word" initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.23, duration: 0.7, ease }}>
+            </span>{' '}
+            <span className="word rise" style={{ animationDelay: '0.23s' }}>
               by&nbsp;day,
-            </motion.span>{' '}
-            <motion.span className="word" initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.28, duration: 0.7, ease }}>
+            </span>{' '}
+            <span className="word rise" style={{ animationDelay: '0.28s' }}>
               and&nbsp;write
-            </motion.span>{' '}
-            <motion.span className="word" initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.33, duration: 0.7, ease }}>
+            </span>{' '}
+            <span className="word rise" style={{ animationDelay: '0.33s' }}>
               <span className="serif grad-text">poetry</span>
-            </motion.span>{' '}
-            <motion.span className="word" initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.38, duration: 0.7, ease }}>
+            </span>{' '}
+            <span className="word rise" style={{ animationDelay: '0.38s' }}>
               by&nbsp;night.
-            </motion.span>
+            </span>
           </h1>
-          <motion.p className="hero-hindi hindi" initial={{ opacity: 0 }} animate={{ opacity: 0.85 }} transition={{ delay: 0.5, duration: 0.8 }}>
+          <p className="hero-hindi hindi rise" style={{ animationDelay: '0.5s' }}>
             {podcast.taglineHindi}
-          </motion.p>
-          <motion.p className="hero-sub" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.45, duration: 0.7, ease }}>
+          </p>
+          <p className="hero-sub rise" style={{ animationDelay: '0.45s' }}>
             I'm <strong>Tatsat Pandey</strong>, a {site.role} working on multi-agent systems, retrieval and
             developer tooling. Off the clock I write and narrate Hindi poems on <strong>{podcast.name}</strong>.
-          </motion.p>
-          <motion.div className="hero-ctas" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.55, duration: 0.7, ease }}>
+          </p>
+          <div className="hero-ctas rise" style={{ animationDelay: '0.55s' }}>
             <a className="btn btn-primary" href="#work">See my work <Icons.arrowDown /></a>
             <a className="btn btn-ghost" href="#podcast"><Icons.play /> Listen</a>
             <ResumeButton />
-          </motion.div>
+          </div>
         </div>
-        <motion.div className="hero-cards" initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.35, duration: 0.9, ease }}>
+        <div className="hero-cards rise" style={{ animationDelay: '0.35s' }}>
           <motion.div className="glass term" style={{ x: tX, y: tY }}>
             <div className="term-bar"><i /><i /><i /><span>rca/agents.py</span></div>
             <Terminal />
@@ -177,7 +181,7 @@ export function Hero() {
           <motion.div style={{ x: bX, y: bY }}>
             <NowPlayingCard />
           </motion.div>
-        </motion.div>
+        </div>
       </div>
       <div className="scroll-cue" aria-hidden="true">SCROLL<i /></div>
     </header>
@@ -235,7 +239,7 @@ function ProjectCard({ p, i }: { p: Project; i: number }) {
           <div className="meta">
             {repo?.language && <span className="lang"><i style={{ background: langColor[repo.language] ?? 'var(--peach)' }} />{repo.language}</span>}
             {repo && repo.stars > 0 && <span className="lang"><Icons.star width={12} height={12} />{repo.stars}</span>}
-            {repo && <span>updated {ago(repo.pushedAt)}</span>}
+            {repo && <span suppressHydrationWarning>updated {ago(repo.pushedAt)}</span>}
           </div>
           <div className="links">
             {p.live && <a className="link-pill" href={p.live} target="_blank" rel="noopener">{p.liveLabel && p.size !== 'sm' ? p.liveLabel : 'Live'} <Icons.arrowUpRight /></a>}
@@ -308,7 +312,7 @@ export function Podcast({ playerRef }: { playerRef: React.RefObject<HTMLDivEleme
                       <PlayButton ep={ep} size="sm" ghost />
                       <div className="ep-main">
                         <b>{ep.title}</b>
-                        <span>{ep.number ? `Episode ${ep.number} · ` : ''}{new Date(ep.date).getFullYear()}</span>
+                        <span>{ep.number ? `Episode ${ep.number} · ` : ''}{fmtYear(ep.date)}</span>
                       </div>
                       <span className="ep-dur">{fmtTime(ep.duration)}</span>
                     </li>
