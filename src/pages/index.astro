@@ -1,0 +1,93 @@
+---
+import Base from '../layouts/Base.astro';
+import KhwaabArt from '../components/KhwaabArt.astro';
+import { site, podcast } from '../config/links';
+import { recognitions } from '../data/recognitions';
+---
+<Base scriptFont title={site.name} description="Tatsat Pandey: engineer building GenAI platforms and developer tooling, and host of the Hindi poetry podcast Khwaab-e-Surkhaab.">
+  <section class="wrap hero">
+    <p class="eyebrow">Engineering · Poetry</p>
+    <h1>Tatsat Pandey</h1>
+    <p class="lede">
+      I build GenAI platforms and developer tools by day, and write and read Hindi poetry on <a href="/khwaab">{podcast.name}</a>.
+    </p>
+    <!-- TODO(Tatsat): a short About paragraph in your own words (and an optional photo). -->
+  </section>
+
+  <section class="wrap" aria-labelledby="explore">
+    <h2 id="explore" class="sr-only">Explore</h2>
+    <div class="bento">
+      <a class="tile work" href="/work">
+        <span class="eyebrow">Work</span>
+        <h3>GenAI platforms, agentic SDLC, Copilot at scale</h3>
+        <p class="muted">Platform engineering, an agentic delivery framework, Copilot enablement for 200+ engineers, and a 15-service billing platform on Azure AKS.</p>
+        <span class="go" aria-hidden="true">→</span>
+      </a>
+      <a class="tile khwaab" href="/khwaab">
+        <KhwaabArt class="art" />
+        <div class="khwaab-copy">
+          <span class="eyebrow">Podcast</span>
+          <h3>{podcast.name}</h3>
+          <p class="script">{podcast.tagline}</p>
+        </div>
+      </a>
+      <a class="tile projects" href="/projects">
+        <span class="eyebrow">Projects</span>
+        <h3>Open-source tools</h3>
+        <p class="muted">agent-arbiter, TokenLens, PromptSentry, LedgerLM and more.</p>
+        <span class="go" aria-hidden="true">→</span>
+      </a>
+      <a class="tile research" href="/research">
+        <span class="eyebrow">Research</span>
+        <h3>Multi-Agent GraphRAG</h3>
+        <p class="muted">M.Tech dissertation on root-cause analysis for telecom billing anomalies.</p>
+        <span class="go" aria-hidden="true">→</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="wrap" id="recognitions" aria-labelledby="rec-h">
+    <h2 id="rec-h">Recognitions</h2>
+    <ul class="recs">
+      {recognitions.map((r) => (
+        <li class="card"><strong>{r.title}</strong><span class="muted">{r.when}</span></li>
+      ))}
+    </ul>
+  </section>
+</Base>
+
+<style>
+  .hero { padding-block: var(--space-6) var(--space-4); }
+  .hero h1 { font-size: var(--step-4); }
+  .lede { font-size: var(--step-1); max-width: 38rem; color: var(--muted); }
+  .lede a { color: var(--ink); }
+
+  .bento { display: grid; gap: var(--space-3); grid-template-columns: 1fr; }
+  .tile {
+    position: relative; display: flex; flex-direction: column; gap: var(--space-1);
+    background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: var(--space-4); text-decoration: none; min-height: 12rem;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+  }
+  .tile:hover { transform: translateY(-2px); border-color: var(--accent); }
+  .tile h3 { margin-bottom: var(--space-2); }
+  .tile p { margin: 0; }
+  .go { margin-top: auto; padding-top: var(--space-3); font-size: var(--step-1); color: var(--accent); }
+
+  .tile.khwaab { padding: 0; overflow: hidden; background: var(--dusk); color: var(--cream); border-color: var(--dusk); min-height: 22rem; }
+  .tile.khwaab .art { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
+  .khwaab-copy { position: relative; margin-top: auto; padding: var(--space-4); background: linear-gradient(transparent, rgb(36 21 45 / 0.92) 35%); }
+  .khwaab-copy .eyebrow { color: #f0cfb2; }
+  .script { font-family: var(--font-script); font-size: var(--step-2); color: var(--amber); }
+
+  @media (min-width: 48rem) {
+    .bento { grid-template-columns: repeat(6, 1fr); grid-auto-rows: minmax(13rem, auto); }
+    .work { grid-column: span 4; }
+    .khwaab { grid-column: span 2; grid-row: span 2; }
+    .projects { grid-column: span 2; }
+    .research { grid-column: span 2; }
+  }
+
+  .recs { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--space-3); grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); }
+  .recs li { display: flex; flex-direction: column; gap: var(--space-1); }
+</style>

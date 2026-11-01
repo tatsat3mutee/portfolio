@@ -1,0 +1,57 @@
+---
+// Original placeholder art: dusk sky, sun, lantern, chai, bougainvillea.
+// TODO(Tatsat): swap for the real cover art when it is in /public/khwaab/.
+const { class: cls = '' } = Astro.props as { class?: string };
+---
+<svg class={cls} viewBox="0 0 600 600" role="img" aria-labelledby="khwaab-art-title">
+  <title id="khwaab-art-title">Illustration: sunset over a balcony with a lantern, a glass of chai and bougainvillea</title>
+  <defs>
+    <linearGradient id="ka-sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3a1f3f" />
+      <stop offset="0.45" stop-color="#c63a7c" />
+      <stop offset="0.75" stop-color="#e2582f" />
+      <stop offset="1" stop-color="#f3a953" />
+    </linearGradient>
+    <radialGradient id="ka-glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#ffe2a8" stop-opacity="0.95" />
+      <stop offset="1" stop-color="#ffe2a8" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  <rect width="600" height="600" fill="url(#ka-sky)" />
+  <circle cx="300" cy="360" r="110" fill="#ffd28a" opacity="0.92" />
+  <path d="M0 380 Q120 330 240 372 T470 360 T600 350 V600 H0Z" fill="#7a2a4c" opacity="0.85" />
+  <path d="M0 430 Q150 395 300 425 T600 410 V600 H0Z" fill="#3a1f3f" />
+  <rect x="0" y="470" width="600" height="130" fill="#24152d" />
+  <rect x="0" y="466" width="600" height="8" fill="#4a2a4a" />
+  <!-- notebook -->
+  <g transform="translate(230 474) skewX(-18)">
+    <rect width="150" height="56" rx="4" fill="#fbead3" />
+    <line x1="75" y1="4" x2="75" y2="52" stroke="#d9bfa2" stroke-width="2" />
+    <g stroke="#c9a98a" stroke-width="2"><line x1="12" y1="18" x2="62" y2="18" /><line x1="12" y1="30" x2="58" y2="30" /><line x1="88" y1="18" x2="138" y2="18" /><line x1="88" y1="30" x2="128" y2="30" /></g>
+  </g>
+  <!-- chai -->
+  <g transform="translate(410 430)">
+    <path d="M0 0 H44 L38 50 H6Z" fill="#fbead3" opacity="0.55" />
+    <path d="M3 16 H41 L38 50 H6Z" fill="#b8642a" />
+    <path d="M14 -8 q6 -10 0 -20 M28 -8 q6 -10 0 -20" stroke="#fbead3" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.7" />
+  </g>
+  <!-- lantern -->
+  <circle cx="130" cy="410" r="80" fill="url(#ka-glow)" />
+  <g transform="translate(104 360)">
+    <path d="M26 -30 V0" stroke="#24152d" stroke-width="3" />
+    <rect x="6" y="0" width="40" height="10" rx="3" fill="#24152d" />
+    <rect x="10" y="10" width="32" height="70" rx="6" fill="#ffcf7a" />
+    <rect x="22" y="22" width="8" height="40" rx="4" fill="#fff4d6" />
+    <rect x="4" y="80" width="44" height="12" rx="3" fill="#24152d" />
+  </g>
+  <!-- bougainvillea -->
+  <g fill="#e2408a">
+    <circle cx="520" cy="60" r="16" /><circle cx="548" cy="90" r="13" /><circle cx="500" cy="100" r="12" />
+    <circle cx="570" cy="40" r="14" /><circle cx="585" cy="120" r="12" /><circle cx="470" cy="50" r="10" />
+    <circle cx="40" cy="40" r="14" /><circle cx="70" cy="18" r="11" /><circle cx="18" cy="80" r="12" />
+  </g>
+  <g fill="#ff7ab6" opacity="0.8">
+    <circle cx="535" cy="70" r="7" /><circle cx="560" cy="110" r="6" /><circle cx="48" cy="52" r="6" />
+  </g>
+  <path d="M600 20 Q520 70 470 160 M0 20 Q50 60 60 120" stroke="#2f5d3a" stroke-width="4" fill="none" />
+</svg>

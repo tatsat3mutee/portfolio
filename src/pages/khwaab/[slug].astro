@@ -1,0 +1,47 @@
+---
+import Base from '../../layouts/Base.astro';
+import Embed from '../../components/Embed.astro';
+import PlatformButtons from '../../components/PlatformButtons.astro';
+import { render } from 'astro:content';
+import { podcast } from '../../config/links';
+import { getEpisodes, ytThumb, ytEmbed, ytWatch, formatDate, type Episode } from '../../lib/episodes';
+
+export async function getStaticPaths() {
+  const eps = await getEpisodes();
+  return eps.map((ep) => ({ params: { slug: ep.id }, props: { ep } }));
+}
+const { ep } = Astro.props as { ep: Episode };
+const { Content } = await render(ep);
+const d = ep.data;
+const overrides = {
+  spotify: d.spotifyUrl,
+  apple: d.appleUrl,
+  jiosaavn: d.jiosaavnUrl,
+  amazon: d.amazonUrl,
+  hubhopper: d.hubhopperUrl,
+  youtube: d.youtubeId ? ytWatch(d.youtubeId) : undefined,
+};
+---
+<Base theme="khwaab" scriptFont title={`${d.title} · ${podcast.name}`} description={d.description} image="/og/khwaab.png">
+  <article class="wrap ep">
+    <p class="eyebrow"><a href="/khwaab">{podcast.name}</a></p>
+    <h1>{d.title}</h1>
+    {d.date && <p class="muted"><time datetime={d.date.toISOString()}>{formatDate(d.date)}</time></p>}
+    <p class="desc">{d.description}</p>
+    {d.youtubeId && (
+      <Embed href={ytWatch(d.youtubeId)} embed={ytEmbed(d.youtubeId)} thumb={ytThumb(d.youtubeId)} title={`${d.title} on YouTube`} label={`Watch “${d.title}”`} />
+    )}
+    {d.audioUrl && <audio controls preload="none" src={d.audioUrl}><a href={d.audioUrl}>Download audio</a></audio>}
+    <h2>Listen on</h2>
+    <PlatformButtons overrides={overrides} />
+    {d.showPoem && <div class="poem"><Content /></div>}
+  </article>
+</Base>
+<style>
+  .ep { max-width: 52rem; padding-block: var(--space-5); }
+  .ep .eyebrow a { text-decoration: none; }
+  .desc { font-size: var(--step-1); }
+  h2 { margin-top: var(--space-5); font-size: var(--step-1); }
+  audio { width: 100%; margin-top: var(--space-3); }
+  .poem { margin-top: var(--space-5); white-space: pre-line; font-family: var(--font-display); font-size: var(--step-1); line-height: 1.7; }
+</style>

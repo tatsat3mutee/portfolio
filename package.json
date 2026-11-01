@@ -1,0 +1,24 @@
+{
+  "name": "tatsatpandey-com",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "og": "node scripts/make-og.mjs"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.12",
+    "@astrojs/sitemap": "^3.7.4",
+    "astro": "^7.4.4",
+    "typescript": "^6.0.3"
+  },
+  "devDependencies": {
+    "sharp": "^0.35.5"
+  }
+}
