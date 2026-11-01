@@ -1,45 +1,52 @@
 # tatsatpandey.com
 
-Personal site: engineering work, projects, research, and the Hindi poetry podcast **Khwaab-e-Surkhaab** (`/khwaab`).
-Built with [Astro](https://astro.build). Output is plain static files in `dist/`, so it runs on Render, Caddy/EC2, S3 or any static host.
+Personal site: GenAI engineering work and the Hindi poetry podcast **Khwaab-e-Surkhaab** (`/khwaab`).
+
+Built with React, Vite, [Motion](https://motion.dev) (animation) and [Lenis](https://lenis.darkroom.engineering) (smooth scroll). Output is static files in `dist/`, so it runs on Render, Caddy/EC2 or any static host.
 
 ## Run locally
 
 ```bash
 npm ci
-npm run dev      # http://localhost:4321
-npm run build    # type-check + build to dist/
+npm run dev      # http://localhost:5173
+npm run build    # fetches fresh data, type-checks, builds to dist/
 ```
 
-## Add a new episode (about 5 minutes)
+## It updates itself
 
-1. Copy `src/content/episodes/agar-tum.md` to `src/content/episodes/<slug>.md`. The file name becomes the URL: `/khwaab/<slug>`.
-2. Fill in `title`, `subtitle`, `date` (YYYY-MM-DD), `description` (one line) and `youtubeId` (the part after `watch?v=`). Write the episode notes as the Markdown body. Direct episode links are optional; empty ones fall back to the show page. Poem text goes in `poem` and only appears if `showPoem: true`.
-3. Commit and push to `main`. Render rebuilds automatically.
+Every build (every push to `main` on Render) runs `scripts/fetch-data.mjs` first:
 
-The newest episode (by `date`) is shown first on `/khwaab`. The Spotify and Apple players on that page always show the newest episodes without any change.
+- **Podcast episodes** come from the Hubhopper RSS feed. A new episode appears on the site, in the player and in the episode list after the next deploy, with no code change.
+- **GitHub activity** (language, stars, "updated 3d ago", the "More on GitHub" list) comes from the GitHub API.
 
-## Where things live
+If either source is unreachable, the saved copies in `src/data/*.json` are used and the build still succeeds.
 
-| What | File |
+To refresh without code changes, trigger a manual deploy in Render (or push any commit).
+
+## Common edits
+
+| What | Where |
 |---|---|
-| All external links (empty = button hidden) | `src/config/links.ts` |
-| Colors, fonts, spacing | `src/styles/tokens.css` |
-| Work / projects / episodes | `src/content/{work,projects,episodes}/*.md` |
-| Recognitions | `src/data/recognitions.ts` |
-| Show cover art (source) | `design/cover/cover.html` |
-| Cover for podcast platforms | `design/cover/out/cover-3000.jpg`, `cover-1400.jpg` |
-| Share images (1200×630) | `public/og/` |
+| Links, socials, podcast platforms, email | `src/data/site.ts` |
+| Selected projects (order, text, size, visual) | `projects` in `src/data/site.ts` |
+| Recognitions, tech marquee | `src/data/site.ts` |
+| YouTube video shown on /khwaab | `podcast.latestVideoId` in `src/data/site.ts` |
+| Colors, fonts, spacing | top of `src/styles.css` |
+| Default share image | `npm run og` → `public/og/default.png` |
 
-Regenerate the cover, site cover images and `/khwaab` share image with `node design/cover/render.cjs` (needs Playwright). Regenerate the default share image with `npm run og`.
+### Resume
 
-Search the repo for `TODO(Tatsat)` to find details still to fill in.
+Add your resume as **`public/resume.pdf`** (for example by uploading it in GitHub's web UI). The Resume buttons appear automatically on the next deploy, and stay hidden while the file is missing.
+
+### Linking to one episode
+
+`https://tatsatpandey.com/khwaab/?ep=<slug>` opens that episode in the player, for example `?ep=agar-tum`.
 
 ## Deploy on Render
 
-Render dashboard → **New → Static Site** → pick this repo.
+Static Site, branch `main`:
 
 - Build command: `npm ci && npm run build`
 - Publish directory: `dist`
 
-Or use **New → Blueprint**, which reads `render.yaml` (same settings plus cache headers). Moving to EC2 + Caddy later needs no code changes.
+Old addresses (`/work`, `/projects`, `/research`, `/khwaab/agar-tum`) redirect to the new sections.
