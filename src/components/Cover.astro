@@ -1,0 +1,18 @@
+---
+// Show cover art. Regenerate the files with: node design/cover/render.cjs
+interface Props { class?: string; sizes?: string; eager?: boolean }
+const { class: cls, sizes = '(min-width: 52rem) 30rem, 100vw', eager = false } = Astro.props;
+---
+<img
+  class={cls}
+  src="/khwaab/cover-800.webp"
+  srcset="/khwaab/cover-480.webp 480w, /khwaab/cover-800.webp 800w, /khwaab/cover-1200.webp 1200w"
+  sizes={sizes}
+  width="800"
+  height="800"
+  alt="Khwaab-e-Surkhaab cover: a sunset over a balcony with a lantern, chai, an open notebook and two surkhaab birds. Tagline: Kuch khwaab abhi baaki hain…"
+  loading={eager ? 'eager' : 'lazy'}
+  fetchpriority={eager ? 'high' : undefined}
+  decoding="async"
+  style="aspect-ratio: 1 / 1; height: auto; object-fit: cover;"
+/>

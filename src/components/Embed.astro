@@ -1,0 +1,46 @@
+---
+// Click-to-load player. Renders a plain link (works without JS);
+// the script in Base.astro swaps it for the iframe on click.
+interface Props {
+  href: string;        // fallback link, opens the platform
+  embed: string;       // iframe src
+  title: string;       // accessible name of the player
+  label: string;       // visible call to action
+  thumb?: string;      // optional background image
+  kind?: 'video' | 'audio';
+  height?: number;     // audio players have fixed heights
+}
+const { href, embed, title, label, thumb, kind = 'video', height = 352 } = Astro.props;
+---
+<a
+  class:list={['facade', kind]}
+  href={href}
+  data-embed={embed}
+  data-title={title}
+  data-height={kind === 'audio' ? height : undefined}
+  style={kind === 'audio' ? `--h:${height}px` : undefined}
+  rel="noopener"
+>
+  {thumb && <img src={thumb} alt="" width="480" height="360" loading="lazy" decoding="async" />}
+  <span class="play" aria-hidden="true">
+    <svg viewBox="0 0 24 24" width="28" height="28"><path fill="currentColor" d="M8 5v14l11-7z" /></svg>
+  </span>
+  <span class="cta">{label}</span>
+</a>
+<style is:global>
+  .facade, .embed { width: 100%; border: 0; border-radius: var(--radius); overflow: hidden; background: #000; }
+  .facade.video, .embed.video { aspect-ratio: 16 / 9; }
+  .facade.audio { height: var(--h, 352px); background: linear-gradient(135deg, var(--dusk-2), var(--dusk)); }
+  .facade { position: relative; display: grid; place-items: center; color: #fff; text-decoration: none; isolation: isolate; }
+  .facade img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1; opacity: 0.85; }
+  .facade .play {
+    display: grid; place-items: center; width: 68px; height: 68px; border-radius: 50%;
+    background: var(--ember); color: #fff; box-shadow: 0 6px 24px rgb(0 0 0 / 0.35);
+    transition: transform 0.2s ease;
+  }
+  .facade:hover .play { transform: scale(1.06); }
+  .facade .cta {
+    position: absolute; bottom: var(--space-3); left: var(--space-3); right: var(--space-3);
+    font-weight: 600; text-shadow: 0 1px 6px rgb(0 0 0 / 0.7);
+  }
+</style>

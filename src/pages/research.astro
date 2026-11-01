@@ -1,0 +1,15 @@
+---
+import Base from '../layouts/Base.astro';
+import { research } from '../config/links';
+---
+<Base title="Research" description="M.Tech dissertation by Tatsat Pandey: Multi-Agent GraphRAG for root-cause analysis of telecom billing anomalies, with a live demo.">
+  <header class="wrap page-head">
+    <p class="eyebrow">Research · M.Tech dissertation</p>
+    <h1>Multi-Agent GraphRAG for telecom billing anomaly root-cause analysis</h1>
+    <p>Using a team of AI agents over a knowledge graph to find why billing anomalies happen.</p>
+  </header>
+  <section class="wrap narrow">
+    <!-- TODO(Tatsat): problem, approach, results and a link to the paper or report, if public. -->
+    <p><a class="btn" href={research.demoUrl} rel="noopener">Open the live demo</a></p>
+  </section>
+</Base>
