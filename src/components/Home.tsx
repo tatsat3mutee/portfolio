@@ -7,6 +7,7 @@ import { FeaturedPlayer, PlayButton } from '../player/Player';
 import { usePlayer } from '../player/PlayerContext';
 import { Platforms, Reveal, ResumeButton, SocialLinks } from './common';
 import { ProjectVisual } from './Visuals';
+import { LiveSystemCard } from './Tech';
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -90,24 +91,6 @@ function Terminal() {
   );
 }
 
-function NowPlayingCard() {
-  const p = usePlayer();
-  return (
-    <div className={`glass np${p.playing ? ' playing' : ''}`}>
-      <div className="np-art">
-        <span className="disc" />
-        <img src={artwork(200)} alt="Khwaab-e-Surkhaab cover art" width={74} height={74} />
-      </div>
-      <div className="np-meta">
-        <small>{p.playing ? 'Now playing' : 'New episode'}</small>
-        <b>{latest.title}</b>
-        <span>{podcast.name} · {fmtTime(latest.duration)}</span>
-      </div>
-      <PlayButton ep={latest} size="sm" />
-    </div>
-  );
-}
-
 export function Hero() {
   const ref = useRef<HTMLElement>(null);
   const mx = useMotionValue(0);
@@ -164,12 +147,13 @@ export function Hero() {
             {podcast.taglineHindi}
           </p>
           <p className="hero-sub rise" style={{ animationDelay: '0.45s' }}>
-            I'm <strong>Tatsat Pandey</strong>, a {site.role} working on multi-agent systems, retrieval and
-            developer tooling. Off the clock I write and narrate Hindi poems on <strong>{podcast.name}</strong>.
+            I'm <strong>Tatsat Pandey</strong>, a {site.role}. I design <strong>multi-agent systems</strong> and{' '}
+            <strong>hybrid retrieval</strong>, build the routing, tracing and evaluation around them, and ship developer
+            tools people install. Off the clock, I write and narrate Hindi poems on <a href="#podcast" className="hero-link">{podcast.name}</a>.
           </p>
           <div className="hero-ctas rise" style={{ animationDelay: '0.55s' }}>
             <a className="btn btn-primary" href="#work">See my work <Icons.arrowDown /></a>
-            <a className="btn btn-ghost" href="#podcast"><Icons.play /> Listen</a>
+            <a className="btn btn-ghost" href="#arch"><Icons.devtools /> How I build</a>
             <ResumeButton />
           </div>
         </div>
@@ -179,7 +163,7 @@ export function Hero() {
             <Terminal />
           </motion.div>
           <motion.div style={{ x: bX, y: bY }}>
-            <NowPlayingCard />
+            <LiveSystemCard />
           </motion.div>
         </div>
       </div>
@@ -259,11 +243,11 @@ export function Work() {
       <div className="wrap">
         <div className="section-head">
           <Reveal>
-            <span className="label">01 · Selected work</span>
+            <span className="label">02 · Selected work</span>
             <h2 className="section-title">Things I've <span className="serif grad-text">built</span></h2>
           </Reveal>
           <Reveal delay={0.1}>
-            <p className="section-sub">Agents, retrieval and developer tools. Activity on each card is pulled live from GitHub on every deploy.</p>
+            <p className="section-sub">Systems that run in production or that people install. Activity on each card is pulled live from GitHub on every deploy; the next section opens them up.</p>
             <a className="link-pill" href="https://github.com/tatsat3mutee?tab=repositories" target="_blank" rel="noopener" style={{ marginTop: 16 }}>
               <Icons.github /> All repositories <Icons.arrowUpRight />
             </a>
@@ -286,7 +270,7 @@ export function Podcast({ playerRef }: { playerRef: React.RefObject<HTMLDivEleme
       <div className="wrap">
         <div className="section-head">
           <Reveal>
-            <span className="label">02 · Poetry</span>
+            <span className="label">04 · Poetry</span>
             <h2 className="section-title">The other <span className="serif grad-text">half</span></h2>
           </Reveal>
           <Reveal delay={0.1}>
@@ -339,7 +323,7 @@ export function About() {
       <div className="wrap">
         <div className="about-grid">
           <Reveal>
-            <span className="label">03 · About</span>
+            <span className="label">05 · About</span>
             <p className="about-big" style={{ marginTop: 18 }}>
               An engineer who <span className="serif grad-text">writes</span>, and a poet who <span className="serif grad-text">ships</span>.{' '}
               <span className="dim">I like systems that explain themselves, and words that don't have to.</span>
@@ -394,7 +378,7 @@ export function Contact() {
     <section className="section contact" id="contact">
       <div className="glow" aria-hidden="true" />
       <div className="wrap">
-        <Reveal><span className="label">04 · Contact</span></Reveal>
+        <Reveal><span className="label">06 · Contact</span></Reveal>
         <Reveal delay={0.05}>
           <h2>Let's <span className="serif grad-text">talk.</span></h2>
         </Reveal>
