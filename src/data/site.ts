@@ -126,3 +126,115 @@ export const stack = [
   'LiteLLM', 'OpenRouter', 'ChromaDB', 'FAISS', 'GitHub Copilot', 'Claude Code', 'VS Code extensions',
   'GitHub Actions', 'Docker', 'Azure', 'AWS', 'Streamlit',
 ];
+
+/* ---------- Engineering depth (facts from each repo's README) ---------- */
+
+export type ArchId = 'diffbrief' | 'rca' | 'ledgerlm';
+
+export const expertise: {
+  icon: 'agents' | 'retrieval' | 'llmops' | 'devtools';
+  title: string;
+  blurb: string;
+  points: string[];
+  proof: { label: string; arch: ArchId }[];
+}[] = [
+  {
+    icon: 'agents',
+    title: 'Multi-agent systems',
+    blurb: 'Teams of specialised agents that investigate, reason, critique and report, instead of one prompt doing everything.',
+    points: ['LangGraph orchestration and shared state', 'Investigator → Reasoner → Critic → Reporter roles', 'Critic loop that sends weak answers back'],
+    proof: [{ label: 'Billing RCA', arch: 'rca' }],
+  },
+  {
+    icon: 'retrieval',
+    title: 'Retrieval & GraphRAG',
+    blurb: 'Retrieval that holds up: lexical and dense search together, a knowledge graph on top, and fusion to rank it.',
+    points: ['BM25 + dense embeddings, fused with RRF', 'GraphRAG over a NetworkX entity graph', 'ChromaDB and FAISS vector stores'],
+    proof: [{ label: 'Billing RCA', arch: 'rca' }],
+  },
+  {
+    icon: 'llmops',
+    title: 'LLM infrastructure & evals',
+    blurb: 'The parts around the model: routing with failover, caching, tracing, and measuring whether it actually works.',
+    points: ['LiteLLM routing with rate-limit failover', 'MLflow + Langfuse tracing, Redis cache', 'ROUGE-L, BERTScore, LLM-as-judge, ablations'],
+    proof: [{ label: 'Billing RCA', arch: 'rca' }, { label: 'Diffbrief', arch: 'diffbrief' }],
+  },
+  {
+    icon: 'devtools',
+    title: 'Developer tools & automation',
+    blurb: 'Tools I want to use myself, and pipelines that run and ship without anyone pressing a button.',
+    points: ['VS Code extensions in TypeScript', 'Scheduled GitHub Actions pipelines', 'EC2 deploys with systemd timers and Caddy'],
+    proof: [{ label: 'LedgerLM', arch: 'ledgerlm' }, { label: 'Diffbrief', arch: 'diffbrief' }],
+  },
+];
+
+export const architectures: {
+  id: ArchId;
+  name: string;
+  summary: string;
+  steps: { title: string; detail: string; tech: string[] }[];
+  facts: { value: string; label: string }[];
+  repo: string;
+  live?: string;
+}[] = [
+  {
+    id: 'diffbrief',
+    name: 'Diffbrief',
+    summary: 'A daily engineering digest that collects, judges, writes and publishes itself.',
+    steps: [
+      { title: 'Collect', detail: 'A few hundred fresh candidates each morning: Hacker News front page, best list and keyword searches, Lobsters, fast-rising GitHub repos, framework release notes, Hugging Face papers and trending models, and about 70 engineering blogs.', tech: ['Bun', 'TypeScript'] },
+      { title: 'Score', detail: 'A model rates every candidate for quality (1–10) and fit with the beat (0–3), and writes a plain headline and a reason to read it from the source\'s own text.', tech: ['OpenRouter', 'LLM judging'] },
+      { title: 'Select', detail: 'Up to 50 stories per edition, most of it reserved for AI and systems, with caps on general security and launches, and nothing already published in the last week.', tech: ['Ranking rules'] },
+      { title: 'Brief', detail: 'Picked stories get a short What / How / Why-it-matters brief and, when the article describes one, an architecture diagram.', tech: ['LLM summaries'] },
+      { title: 'Ship', detail: 'GitHub Actions builds the edition at 05:53 IST with a backup run, plus an hourly Security Watch from CISA\'s exploited-vulnerabilities list. A systemd timer on EC2 pulls new releases every 15 minutes behind Caddy.', tech: ['GitHub Actions', 'EC2', 'systemd', 'Caddy'] },
+    ],
+    facts: [
+      { value: '100s', label: 'candidates every morning' },
+      { value: '≤50', label: 'stories published' },
+      { value: '~70', label: 'blogs watched' },
+      { value: '1h', label: 'security watch cycle' },
+    ],
+    repo: 'devpulse',
+    live: 'https://diffbrief.tatsatpandey.com',
+  },
+  {
+    id: 'rca',
+    name: 'Billing RCA (M.Tech)',
+    summary: 'Detect a billing anomaly, then let a team of agents find and explain its root cause, and prove it with ablations.',
+    steps: [
+      { title: 'Detect', detail: 'IsolationForest, statistical z-scores and rule-based validators flag anomalies. Five anomaly types (zero billing, duplicate charge, usage spike, SLA breach, CDR mismatch) are injected for training and evaluation.', tech: ['scikit-learn', 'IsolationForest'] },
+      { title: 'Retrieve', detail: 'Hybrid retrieval over 8 RCA playbooks: ChromaDB with all-MiniLM-L6-v2 (384-dim), BM25 and a NetworkX GraphRAG, merged with reciprocal rank fusion.', tech: ['ChromaDB', 'BM25', 'GraphRAG', 'RRF'] },
+      { title: 'Reason', detail: 'A LangGraph orchestrator runs Investigator → Reasoner → Critic → Reporter. The critic sends weak explanations back for another pass.', tech: ['LangGraph'] },
+      { title: 'Route', detail: 'LiteLLM routes to Groq first with OpenRouter fallbacks and automatic rate-limit failover. Redis caches responses; MLflow and Langfuse trace every run.', tech: ['LiteLLM', 'Redis', 'MLflow', 'Langfuse'] },
+      { title: 'Evaluate', detail: 'Scored against 60 expert-written root causes with ROUGE-L, BERTScore and a 4-axis LLM judge, across a 5-configuration ablation (no-RAG → full GraphRAG), with Wilcoxon tests and bootstrap 95% CIs.', tech: ['ROUGE-L', 'BERTScore', 'LLM-as-judge'] },
+    ],
+    facts: [
+      { value: '60', label: 'expert-written RCAs' },
+      { value: '5', label: 'ablation configs' },
+      { value: '54k', label: 'synthetic billing rows' },
+      { value: '4', label: 'Docker services' },
+    ],
+    repo: 'mtech-teleco-multiagent-project',
+    live: 'https://rca.tatsatpandey.com',
+  },
+  {
+    id: 'ledgerlm',
+    name: 'LedgerLM',
+    summary: 'A VS Code extension that shows exactly where your AI tokens go, without anything leaving your machine.',
+    steps: [
+      { title: 'Read', detail: 'Opens the logs Claude Code, GitHub Copilot, Codex CLI and OpenCode already write to disk, strictly read-only.', tech: ['Node fs', 'JSONL'] },
+      { title: 'Parse', detail: 'Extracts per-call usage: fresh input, cache reads, cache writes and output tokens, plus sessions, subagents, tools and hooks.', tech: ['TypeScript'] },
+      { title: 'Price', detail: 'Cost only when trustworthy: Copilot\'s billed credits, labelled estimates for Claude Code and Codex from bundled price tables, and "≥" when a total is a lower bound.', tech: ['Cost model'] },
+      { title: 'Store', detail: 'A local sql.js SQLite file in VS Code\'s storage, written atomically, with a lock file so only one window writes while others read.', tech: ['sql.js', 'SQLite'] },
+      { title: 'Show', detail: 'A tabbed dashboard with live refresh (fs.watch, about 2 seconds), budget alerts, and CSV/JSON export.', tech: ['VS Code API', 'Webview'] },
+    ],
+    facts: [
+      { value: '4', label: 'AI tools tracked' },
+      { value: '0', label: 'network requests' },
+      { value: '~2s', label: 'live refresh' },
+      { value: '100%', label: 'local and offline' },
+    ],
+    repo: 'ledgerlm',
+    live: 'https://marketplace.visualstudio.com/items?itemName=TatsatP.ledgerlm',
+  },
+];

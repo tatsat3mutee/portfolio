@@ -37,6 +37,11 @@ export const Icons = {
   check: line(<path d="M5 12.5l4.5 4.5L19 7" />),
   close: line(<><path d="M6 6l12 12" /><path d="M18 6L6 18" /></>),
   trophy: line(<><path d="M8 21h8M12 17v4" /><path d="M7 4h10v5a5 5 0 0 1-10 0z" /><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3" /></>),
+  agents: line(<><circle cx="12" cy="5" r="2.5" /><circle cx="5" cy="18" r="2.5" /><circle cx="19" cy="18" r="2.5" /><path d="M12 7.5v4M12 11.5l-5.5 4.5M12 11.5l5.5 4.5" /></>),
+  retrieval: line(<><circle cx="10.5" cy="10.5" r="6" /><path d="M15 15l5.5 5.5" /><path d="M8 10.5h5M10.5 8v5" /></>),
+  llmops: line(<><path d="M4 6h10M4 12h16M4 18h7" /><circle cx="17" cy="6" r="2.2" /><circle cx="14" cy="18" r="2.2" /></>),
+  devtools: line(<><rect x="3" y="4" width="18" height="16" rx="2.5" /><path d="M7 10l3 2.5L7 15" /><path d="M12.5 15H17" /></>),
+  pulse: line(<path d="M3 12h4l2.5-6 4 12 2.5-6H21" />),
   star: (p: P) => <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" {...p}><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z" /></svg>,
 };
 
